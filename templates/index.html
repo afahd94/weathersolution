@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Explorer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Weather Explorer</h1>
+        <form action="/weather" method="POST">
+            <label for="location">Select Location:</label>
+            <select id="location" name="location">
+                {% for index, location in enumerate(locations) %}
+                    <option value="{{ index }}">{{ location.Location }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Explore</button>
+        </form>
+        <a href="/map">View Destination Map</a> <!-- Add this line for the map link -->
+    </div>
+</body>
+
+</html>
