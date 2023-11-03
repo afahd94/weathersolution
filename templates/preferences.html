@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Preferences</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>User Preferences</h1>
+        <form action="/save_preferences" method="POST">
+            <label for="temperature-unit">Temperature Unit:</label>
+            <select id="temperature-unit" name="temperature_unit">
+                <option value="celsius">Celsius</option>
+                <option value="fahrenheit">Fahrenheit</option>
+            </select>
+            <label for="notification-enabled">Enable Notifications:</label>
+            <input type="checkbox" id="notification-enabled" name="notification_enabled">
+            <button type="submit">Save Preferences</button>
+        </form>
+    </div>
+</body>
+
+</html>
+

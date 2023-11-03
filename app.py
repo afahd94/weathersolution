@@ -1,7 +1,7 @@
 import csv
 import os
 import requests
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 
@@ -54,8 +54,25 @@ def weather():
 def map():
     return render_template('map.html', locations=itinerary_data)
 
+# Route for the user preferences page
+@app.route('/preferences', methods=['GET', 'POST'])
+def preferences():
+    if request.method == 'POST':
+        # Handles form submission for saving user preferences
+        # Retrieve form data using request.form dictionary
+        temperature_unit = request.form['temperature_unit']
+        notification_enabled = request.form.get('notification_enabled')
+        # Process the form data (e.g., saving it to a database)
+        # ...
+        # Redirect to a success page or the preferences page itself
+        return redirect('/preferences')
+    else:
+        # Handles GET request to display the user preferences form
+        return render_template('preferences.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
 
