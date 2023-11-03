@@ -58,20 +58,27 @@ def map():
 @app.route('/preferences', methods=['GET', 'POST'])
 def preferences():
     if request.method == 'POST':
-        # Handles form submission for saving user preferences
-        # Retrieve form data using request.form dictionary
-        temperature_unit = request.form['temperature_unit']
-        notification_enabled = request.form.get('notification_enabled')
-        # Process the form data (e.g., saving it to a database)
-        # ...
-        # Redirect to a success page or the preferences page itself
+        # Handle form submission for saving preferences
+        # For example, save the form data to a database
+        # After processing the form data, redirect to the save_preferences route
+        return redirect('/save_preferences')
+    else:
+        # Display the preferences form for GET requests
+        return render_template('preferences.html')
+
+@app.route('/save_preferences', methods=['GET', 'POST'])
+def save_preferences():
+    if request.method == 'POST':
+        # Handle form submission for saving preferences
+        # After processing the form data, redirect to the preferences route
         return redirect('/preferences')
     else:
-        # Handles GET request to display the user preferences form
-        return render_template('preferences.html')
+        # Display the save_preferences form for GET requests
+        return render_template('save_preferences.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
 
