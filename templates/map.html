@@ -38,6 +38,14 @@
         {% endfor %}
 
         map.addLayer(markers);
+
+          var backButton = L.control({position: 'topleft'});
+        backButton.onAdd = function(map) {
+            var div = L.DomUtil.create('div', 'back-to-home-button');
+            div.innerHTML = '<a href="/">Back to Homepage</a>';
+            return div;
+        };
+        backButton.addTo(map);
     </script>
 </body>
 

@@ -10,6 +10,11 @@ app.static_folder = 'static'
 # OpenWeatherMap API Key
 API_KEY = '0a84c32ffb40e99cf8e9908652c005a0'
 
+# Dummy user data (for project purposes)
+USER_DATA = {
+    'anthony_fahd': 'password1'
+}
+
 # Read itinerary data from CSV file
 def read_itinerary_from_csv():
     itinerary = []
@@ -54,6 +59,22 @@ def weather():
 def map():
     return render_template('map.html', locations=itinerary_data)
 
+# Route for the login page
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if username in USER_DATA and USER_DATA[username] == password:
+            # Successful login, redirect to the home page
+            return redirect('/')
+        else:
+            # Invalid credentials, display an error message
+            return render_template('login.html', error='Invalid username or password')
+    else:
+        # Display the login form for GET requests
+        return render_template('login.html')
+
 # Route for the user preferences page
 @app.route('/preferences', methods=['GET', 'POST'])
 def preferences():
@@ -66,6 +87,7 @@ def preferences():
         # Display the preferences form for GET requests
         return render_template('preferences.html')
 
+# Route for the save preferences page
 @app.route('/save_preferences', methods=['GET', 'POST'])
 def save_preferences():
     if request.method == 'POST':
@@ -78,6 +100,8 @@ def save_preferences():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
 
 
 
